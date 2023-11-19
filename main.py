@@ -8,15 +8,19 @@ chrome_options = Options()
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 chrome_options.add_experimental_option("detach", True)
 
-browser = webdriver.Chrome()
+KEYWORD = "buy domain"
+
+browser = webdriver.Chrome(options=chrome_options)
 browser.get("https://google.com")
 
 
 search_bar = browser.find_element(By.CLASS_NAME, "gLFyf")
 
-search_bar.send_keys("hello!")
+search_bar.send_keys(KEYWORD)
 search_bar.send_keys(Keys.ENTER)
 
-search_result = browser.find_elements(By.CLASS_NAME, "LC20lb MBeuO DKV0Md")
+search_results = browser.find_elements(By.CLASS_NAME, "g")
 
-print(search_result)
+search_results = browser.find_elements(By.CSS_SELECTOR, "h3")
+for result in search_results:
+    print(result.text)
